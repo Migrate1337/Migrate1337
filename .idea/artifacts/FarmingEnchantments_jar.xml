@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FarmingEnchantments:jar">
+    <output-path>D:/test/plugins</output-path>
+    <root id="archive" name="FarmingEnchantments.jar">
+      <element id="module-output" name="FarmingEnchantments" />
+    </root>
+  </artifact>
+</component>

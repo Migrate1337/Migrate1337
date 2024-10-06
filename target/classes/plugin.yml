@@ -1,0 +1,10 @@
+name: FarmingEnchantments
+version: '1.0-SNAPSHOT'
+main: org.migrate1337.farmingenchantments.FarmingEnchantments
+api-version: '1.16'
+commands:
+  farmingenchantments:
+    description: Shows info about the plugin;
+    usage: /farmingenchantments
+    aliases: fe
+

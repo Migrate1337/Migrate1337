@@ -1,0 +1,26 @@
+messages:
+  noPermission: "&cYou don't have a permission!" #This message player will see if he doesn't have a permission
+names:
+  potatoEnchantName: "&d&lPotato Booster"
+  carrotEnchantName: "&d&lCarrot Booster"
+  potatoFragmentName: '&6Potato fragment'
+  carrotFragmentName: "&6Carrot fragment"
+descriptions:
+  potatoFragmentDescription: "&6Using for nothing"
+  carrotFragmentDescription: "&6Using for nothing"
+values:
+  HeadValuePotatoFragment: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Y0NjI0ZWJmN2Q0MTlhMTFlNDNlZDBjMjAzOGQzMmNkMDlhZDFkN2E2YzZlMjBmNjMzOWNiY2ZlMzg2ZmQxYyJ9fX0=" #If u want to change head`s value, go to minecraft-heads.com and copy value of head
+  HeadValueCarrotFragment: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGQzYTZiZDk4YWMxODMzYzY2NGM0OTA5ZmY4ZDJkYzYyY2U4ODdiZGNmM2NjNWIzODQ4NjUxYWU1YWY2YiJ9fX0="
+  enablePotatoDropMessage: true #Choose true or false to show potato drop message
+  enablePotatoFragmentDropMessage: true #Choose true or false to show potato fragment drop message
+  chanceToDropCarrotFragment: 25 #Percent chance to drop carrot fragment
+  enableCarrotDropMessage: true #Choose true or false to show carrot drop message
+  enableCarrotFragmentDropMessage: true #Choose true or false to show carrot fragment drop message
+
+  #How it works: With special ecnhant base drop amounts to 1.
+  #Then it multiplies to enchant lvl + 1(Example: 1 enchant lvl will take 2, because 1 * (1+1) its 2. 2 enchant lvl will take 3, because 1*(1+2) its 3) and in result we get totaldrop.
+  #Then we take the random number from minimumIncreaseDropValue to maximumIncreaseDropValue, and we get randomdrop.
+  #The final step is multiply total drop to randomdrop, and we get a result.
+  minimumIncreaseDropValue: 1.5
+  maximumIncreaseDropValue: 2.7
+  chanceToDropPotatoFragment: 25 #Percent chance to drop potato fragment
