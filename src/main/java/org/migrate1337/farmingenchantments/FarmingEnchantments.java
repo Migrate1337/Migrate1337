@@ -10,10 +10,10 @@ import org.migrate1337.farmingenchantments.farmenhantments.CarrotEnchant;
 import org.migrate1337.farmingenchantments.farmenhantments.PotatoEnchant;
 import org.migrate1337.farmingenchantments.items.CarrotFragment;
 import org.migrate1337.farmingenchantments.items.PotatoFragment;
+import org.migrate1337.farmingenchantments.utils.CustomTabCompleter;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 public final class FarmingEnchantments extends JavaPlugin {
     private static FarmingEnchantments plugin;
@@ -22,9 +22,9 @@ public final class FarmingEnchantments extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
         getConfig().options().copyDefaults(true);
-        saveConfig();
+        saveDefaultConfig();
+
 
         plugin = this;
         getCommand("farmingenchantments").setExecutor(new FarmingEnchantmentsCommand(this));
@@ -51,6 +51,8 @@ public final class FarmingEnchantments extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(carrotFragment, this);
         ItemStack customPotatoItem = potatoFragment.createPotatoFragment();
         ItemStack customCarrotItem = carrotFragment.createCarrotFragment();
+        this.getCommand("farmingenchantments").setExecutor(new FarmingEnchantmentsCommand(this));
+        this.getCommand("farmingenchantments").setTabCompleter(new CustomTabCompleter());
     }
 
     @Override

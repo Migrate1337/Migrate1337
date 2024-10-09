@@ -21,6 +21,7 @@ values:
   #Then it multiplies to enchant lvl + 1(Example: 1 enchant lvl will take 2, because 1 * (1+1) its 2. 2 enchant lvl will take 3, because 1*(1+2) its 3) and in result we get totaldrop.
   #Then we take the random number from minimumIncreaseDropValue to maximumIncreaseDropValue, and we get randomdrop.
   #The final step is multiply total drop to randomdrop, and we get a result.
+  baseDropValue: 1
   minimumIncreaseDropValue: 1.5
   maximumIncreaseDropValue: 2.7
   chanceToDropPotatoFragment: 25 #Percent chance to drop potato fragment

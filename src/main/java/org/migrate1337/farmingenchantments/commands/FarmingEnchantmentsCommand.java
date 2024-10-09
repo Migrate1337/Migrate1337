@@ -26,7 +26,7 @@ public class FarmingEnchantmentsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(sender.hasPermission("farmingenchants.*")){
             if (args.length == 0) {
-                sender.sendMessage(ColorUtils.parseMessage("&#08FB54[F&#18F84Fa&#28F44Ar&#38F145m&#49ED41i&#59EA3Cn&#69E637g&#79E332E&#89DF2Dn&#99DC28c&#A9D823h&#BAD51Fa&#CAD11An&#DACE15t&#EACA10s]§f\nVersion: 1-0-0 SNAPSHOT\nUse /farmingenchantments info or\n/fe info to get commands list"));
+                sender.sendMessage(ColorUtils.parseMessage("&#08FB54[F&#18F84Fa&#28F44Ar&#38F145m&#49ED41i&#59EA3Cn&#69E637g&#79E332E&#89DF2Dn&#99DC28c&#A9D823h&#BAD51Fa&#CAD11An&#DACE15t&#EACA10s]§f\nVersion: 1-0-0 SNAPSHOT\nUse /farmingenchantments help or\n/fe help to get commands list"));
                 return true;
             }
             if (args[0].equalsIgnoreCase("reload")) {
@@ -34,61 +34,80 @@ public class FarmingEnchantmentsCommand implements CommandExecutor {
                 sender.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10]&f Config reloaded!"));
             }
             if(args[0].equalsIgnoreCase("list")){
-                sender.sendMessage(ColorUtils.parseMessage("&#08FB54[F&#18F84Fa&#28F44Ar&#38F145m&#49ED41i&#59EA3Cn&#69E637g&#79E332E&#89DF2Dn&#99DC28c&#A9D823h&#BAD51Fa&#CAD11An&#DACE15t&#EACA10s]&f\n" +
-                        "§d&lPotato booster&f - Increase chance to drop more potatoes and can drop &6potato fragment\n" +
-                        "§d&lCarrot booster&f - Increase chance to drop more carrots and can drop &6carrot fragment"));
+                sender.sendMessage(ColorUtils.parseMessage("&7================ &#08FB54[F&#18F84Fa&#28F44Ar&#38F145m&#49ED41i&#59EA3Cn&#69E637g&#79E332E&#89DF2Dn&#99DC28c&#A9D823h&#BAD51Fa&#CAD11An&#DACE15t&#EACA10s]&7 ================\n" +
+                        "&e&lPotato booster&f - Increase chance to drop more potatoes and can drop &6potato fragment &7(Use 'potatofragment' to give)\n" +
+                        "&e&lCarrot booster&f - Increase chance to drop more carrots and can drop &6carrot fragment &7(Use 'carrotfragment' to give)\n" +
+                        "&7================================================="));
 
             }
-            if(args[0].equalsIgnoreCase("info")){
-                sender.sendMessage(ColorUtils.parseMessage("&#08FB54[F&#18F84Fa&#28F44Ar&#38F145m&#49ED41i&#59EA3Cn&#69E637g&#79E332E&#89DF2Dn&#99DC28c&#A9D823h&#BAD51Fa&#CAD11An&#DACE15t&#EACA10s]&f\n" +
-                        "/fe reload - Reload config\n" +
-                        "/fe ecnhant (enchantment) (level) - Enchant hoe\n" +
-                        "/fe giveitem (name) (item) (amount) - Give an item to player\n"));
+            if(args[0].equalsIgnoreCase("help")){
+                sender.sendMessage(ColorUtils.parseMessage("&7================ &#08FB54[F&#18F84Fa&#28F44Ar&#38F145m&#49ED41i&#59EA3Cn&#69E637g&#79E332E&#89DF2Dn&#99DC28c&#A9D823h&#BAD51Fa&#CAD11An&#DACE15t&#EACA10s]&7 ================\n" +
+                        "&e/fe reload - &fReload plugin\n" +
+                        "&e/fe enchant (enchantment) (level) &f- Enchant hoe\n" +
+                        "&e/fe giveitem (player) (item) (amount) &f- Give an item to player\n" +
+                        "&e/fe list &f- Show enchantment list\n" +
+                        "&7================================================="));
 
             }
             if (args[0].equalsIgnoreCase("enchant")) {
                 Player player = (Player) sender;
                 ItemStack itemInHand = player.getInventory().getItemInMainHand();
 
-                if((itemInHand.getType().name().endsWith("_HOE"))){
+                if (itemInHand.getType().name().endsWith("_HOE")) {
                     ItemMeta meta = itemInHand.getItemMeta();
                     ArrayList<String> lore = new ArrayList<>();
-                    if(args[1].equalsIgnoreCase("potatobooster")){
-                        if(args.length == 2){
-                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §fType the enchantment level."));
-                        }
-                        if (args[2].equalsIgnoreCase("1")) {
-                            meta.addEnchant(FarmingEnchantments.potatoEnchant, 1, true);
-                            lore.add("§d§l" + plugin.getConfig().getString("names.potatoEnchantName") + " §d§lI");
-                            meta.setLore(lore);
-                            itemInHand.setItemMeta(meta);
-                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §aYour hoe was enchanted!"));
-                        } else if (args[2].equalsIgnoreCase("2")) {
-                            meta.addEnchant(FarmingEnchantments.potatoEnchant, 2, true);
-                            lore.add("§d§l" + plugin.getConfig().getString("names.potatoEnchantName") + " §d§lII");
-                            meta.setLore(lore);
-                            itemInHand.setItemMeta(meta);
-                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §aYour hoe was enchanted!"));
-                        } else if(Integer.parseInt(args[2]) > 2 || Integer.parseInt(args[2]) < 1){
-                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §cYou have entered an incorrect enchantment level!"));
-                        }
+
+                    if (args.length < 2) {
+                        player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §fType the enchantment."));
+                        return true;
                     }
-                    if(args[1].equalsIgnoreCase("carrotbooster")){
+
+                    if (args[1].equalsIgnoreCase("potatobooster")) {
+                        if (args.length < 3) {
+                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §fType the enchantment level."));
+                            return true;
+                        }
+
+                        if (args.length == 3) {
+                            if (args[2].equalsIgnoreCase("1")) {
+                                meta.addEnchant(FarmingEnchantments.potatoEnchant, 1, true);
+                                lore.add(ColorUtils.parseMessage(plugin.getConfig().getString("names.potatoEnchantName") + " I"));
+                                meta.setLore(lore);
+                                itemInHand.setItemMeta(meta);
+                                player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §aYour hoe was enchanted!"));
+                            } else if (args[2].equalsIgnoreCase("2")) {
+                                meta.addEnchant(FarmingEnchantments.potatoEnchant, 2, true);
+                                lore.add(ColorUtils.parseMessage(plugin.getConfig().getString("names.potatoEnchantName") + " II"));
+                                meta.setLore(lore);
+                                itemInHand.setItemMeta(meta);
+                                player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §aYour hoe was enchanted!"));
+                            } else {
+                                player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §cYou have entered an incorrect enchantment level!"));
+                            }
+                        }
+                    } else if (args[1].equalsIgnoreCase("carrotbooster")) {
+                        if (args.length < 3) {
+                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §fType the enchantment level."));
+                            return true;
+                        }
+
                         if (args[2].equalsIgnoreCase("1")) {
                             meta.addEnchant(FarmingEnchantments.carrotEnchant, 1, true);
-                            lore.add("§d§l" + plugin.getConfig().getString("names.carrotEnchantName") + " §d§lI");
+                            lore.add(ColorUtils.parseMessage(plugin.getConfig().getString("names.carrotEnchantName") + " I"));
                             meta.setLore(lore);
                             itemInHand.setItemMeta(meta);
-                            player.sendMessage("§a[§eFE§a] §aYour hoe was enchanted!");
+                            player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §aYour hoe was enchanted!"));
                         } else if (args[2].equalsIgnoreCase("2")) {
                             meta.addEnchant(FarmingEnchantments.carrotEnchant, 2, true);
-                            lore.add(plugin.getConfig().getString("names.carrotEnchantName") + " §d§lII");
+                            lore.add(ColorUtils.parseMessage(plugin.getConfig().getString("names.carrotEnchantName") + " II"));
                             meta.setLore(lore);
                             itemInHand.setItemMeta(meta);
                             player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §aYour hoe was enchanted!"));
                         } else {
                             player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §cType a correct enchantment level!"));
                         }
+                    } else {
+                        player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §cType a correct enchantment!"));
                     }
                 } else {
                     player.sendMessage(ColorUtils.parseMessage("&#08FB54[&#53EB3DF&#9FDA27E&#EACA10] §cYou need to hold the hoe in your hands to enchant it."));

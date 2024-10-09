@@ -41,7 +41,7 @@ public class PotatoEnchant extends Enchantment implements Listener {
             if (ageable.getAge() == ageable.getMaximumAge()) {
                 e.setDropItems(false);
 
-                int baseDrop = 1;
+                int baseDrop = plugin.getConfig().getInt("values.baseDropValue");
                 int cropBoostLevel = tool.getEnchantmentLevel(potatoEnchant);
                 int extraDrop = baseDrop * (cropBoostLevel + 1);
                 int totalDrop = baseDrop + extraDrop;
